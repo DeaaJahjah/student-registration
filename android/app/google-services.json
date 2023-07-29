@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "683149920474",
+    "project_id": "student-reg-fcaf3",
+    "storage_bucket": "student-reg-fcaf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683149920474:android:fefb089c38e425e647fde3",
+        "android_client_info": {
+          "package_name": "com.example.student_registeration_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683149920474-i9j6vl2mhn6vb1rao69kju7jqfpp7qtt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJZRNZcdeLGzLYuD1EkSqVMm1-dQMnLCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683149920474-i9j6vl2mhn6vb1rao69kju7jqfpp7qtt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "683149920474-980j3aqvk599h89s3v2tv253klhtgrbn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.studentRegisterationSystem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
