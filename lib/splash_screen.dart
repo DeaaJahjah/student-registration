@@ -12,6 +12,7 @@ import 'package:student_registeration_system/config/widgets/shadow_button.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
 import 'package:student_registeration_system/features/home/screens/home_screen.dart';
 import 'package:student_registeration_system/registration/screens/personal_data.dart';
+import 'package:student_registeration_system/registration/services/student_db_services.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/';
@@ -82,7 +83,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
                                   // Sign the user in (or link) with the auto-generated credential
                                   await auth.signInWithCredential(credential);
-                                  Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
 
                                   // Navigator.of(context).pushNamed(PersonalData.routeName);
                                 },
@@ -213,7 +213,16 @@ class _SplashScreenState extends State<SplashScreen> {
         isLoadingOTP = false;
       });
       if (authCredential.user != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+        final accountState = await StudentsDbService().checkAccountStatus(context);
+
+        print('accountState $accountState');
+        if (accountState == 'مفعل') {
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        } else {
+          showErrorSnackBar(context, ' الحساب $accountState. الرجاء المحاولة لاحقا');
+          await auth.signOut();
+        }
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       }
     } on FirebaseAuthException catch (e) {
       setState(() {

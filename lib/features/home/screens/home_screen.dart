@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/config/widgets/custom_appbar.dart';
 import 'package:student_registeration_system/features/home/widgets/home_body.dart';
+import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
 
 import '../../../registration/providers/registration_provider.dart';
 
@@ -15,9 +16,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool loadingCollageId = true;
   @override
   void initState() {
-    Future.delayed(Duration.zero, () => context.read<RegistrationProvider>().getStudent());
+    Future.delayed(Duration.zero, () {
+      context.read<RegistrationProvider>().getStudent().then((value) {
+        setState(() {
+          loadingCollageId = false;
+        });
+      });
+      NotificationDbService().showNotification();
+    });
     super.initState();
   }
 
@@ -32,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'الرئيسية',
           ),
           Image.asset('assets/images/banner.png'),
-          const HomeBody(),
+          HomeBody(loadingCollageId: loadingCollageId),
           Text(
             '''
 سوف يتم تفعيل التسجيل على السنة الجديدة بعد اجتياز

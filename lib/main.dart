@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:student_registeration_system/admin/admin_app.dart';
 import 'package:student_registeration_system/app.dart';
 import 'package:student_registeration_system/config/utils/shared_pref.dart';
+import 'package:student_registeration_system/features/notification/services/notification_service.dart';
 import 'package:student_registeration_system/firebase_options.dart';
 
 void main() async {
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationService().init();
 
   runApp(!kIsWeb ? const MyApp() : const AdminApp());
 }

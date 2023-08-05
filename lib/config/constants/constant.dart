@@ -20,7 +20,23 @@ List<String> individualsNum = [
   'التاسع',
   'العاشر'
 ];
-
+const List<String> columnsNames = [
+  'الرقم الجامعي',
+  'الاسم',
+  'اسم الأب',
+  'اسم الأم',
+  'رقم الهاتف',
+  'المحفظة',
+  'نوع القبول',
+  'الوضع',
+  'الجنسية',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
 // const sizedBoxXLarge = SizedBox(height: 50);
 
 // const paddingLR = 10.0;

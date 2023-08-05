@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:student_registeration_system/config/routes/router.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/features/home/screens/home_screen.dart';
+import 'package:student_registeration_system/features/notification/services/navigation_service.dart';
 import 'package:student_registeration_system/registration/providers/registration_provider.dart';
 import 'package:student_registeration_system/splash_screen.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: theme,
+          navigatorKey: GlobalVariable.navState,
           locale: const Locale('ar'),
           supportedLocales: const [
             Locale("ar", "AE"),

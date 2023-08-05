@@ -36,6 +36,7 @@ class Collage extends Equatable {
   Map<String, dynamic> toJson() => _$CollageToJson(this);
 
   factory Collage.fromFirestore(DocumentSnapshot documentSnapshot) {
+    print(documentSnapshot.data());
     Collage collage = Collage.fromJson(documentSnapshot.data() as Map<String, dynamic>);
     collage = collage.copyWith(id: documentSnapshot.id);
     return collage;

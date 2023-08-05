@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/admin_home_screen.dart';
+import 'package:student_registeration_system/admin/auth/admin_login.dart';
 import 'package:student_registeration_system/config/routes/router.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 
@@ -25,8 +26,8 @@ class AdminApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       onGenerateRoute: onGenerateRoute,
-      // home: auth.currentUser != null ? const AdminHomeScreen() : const AdminLogin(),
-      home: const AdminHomeScreen(),
+      home: auth.currentUser != null ? const AdminHomeScreen() : const AdminLogin(),
+      // home: const AdminHomeScreen(),
     );
   }
 }

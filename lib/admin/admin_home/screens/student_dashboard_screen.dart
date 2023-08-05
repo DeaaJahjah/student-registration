@@ -1,138 +1,189 @@
-import 'package:expandable_datatable/expandable_datatable.dart';
 import 'package:flutter/material.dart';
+import 'package:student_registeration_system/admin/admin_home/services/data_source.dart';
+import 'package:student_registeration_system/config/enums/enums.dart';
+import 'package:student_registeration_system/registration/models/student.dart';
+import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class StudentDashboardScreen extends StatelessWidget {
+class StudentDashboardScreen extends StatefulWidget {
+  static const routeName = '/student-dashboard';
   const StudentDashboardScreen({
     super.key,
   });
 
   @override
+  State<StudentDashboardScreen> createState() => _StudentDashboardScreenState();
+}
+
+class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
+  @override
   Widget build(BuildContext context) {
-    List<Test> students = [
-      Test(1, 'name', 'firstName', 'lastName', 'maidenName'),
-      Test(2, 'name', 'firstName', 'lastName', 'maidenName'),
-      Test(2, 'name', 'firstName', 'lastName', 'maidenName'),
-    ];
-    List<ExpandableColumn<dynamic>> headers = [
-      ExpandableColumn<int>(columnTitle: "ID", columnFlex: 1),
-      ExpandableColumn<String>(columnTitle: "First name", columnFlex: 2),
-      ExpandableColumn<String>(columnTitle: "Last name", columnFlex: 2),
-      ExpandableColumn<String>(columnTitle: "Maiden name", columnFlex: 2),
-      ExpandableColumn<int>(columnTitle: "Age", columnFlex: 1),
-      ExpandableColumn<String>(columnTitle: "Gender", columnFlex: 2),
-      ExpandableColumn<String>(columnTitle: "Email", columnFlex: 4),
-    ];
-    List<ExpandableRow> rows = students.map<ExpandableRow>((e) {
-      return ExpandableRow(cells: [
-        ExpandableCell<int>(columnTitle: "ID", value: e.id),
-        ExpandableCell<String>(columnTitle: "First name", value: e.firstName),
-        ExpandableCell<String>(columnTitle: "Last name", value: e.lastName),
-        ExpandableCell<String>(columnTitle: "Maiden name", value: e.maidenName),
-        // ExpandableCell<int>(columnTitle: "Age", value: e.age),
-        // ExpandableCell<String>(columnTitle: "Gender", value: e.gender),
-        // ExpandableCell<String>(columnTitle: "Email", value: e.email),
-      ]);
-    }).toList();
     return Expanded(
       flex: 8,
-      child: ExpandableTheme(
-        data: ExpandableThemeData(
-          context,
-          rowBorder: const BorderSide(color: Colors.amber),
-          expandedBorderColor: Colors.transparent,
-          paginationSize: 48,
-        ),
-        child: ExpandableDataTable(
-          rows: rows,
-          headers: headers,
-          visibleColumnCount: 4,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(tabs: [Text('الطلاب الجدد'), Text('الطلاب القدامى')]),
+          ),
+          body: TabBarView(children: [
+            BuildStudents(
+              state: AccountState.pending,
+            ),
+            BuildStudents(
+              state: AccountState.active,
+            ),
+          ]),
         ),
       ),
     );
   }
 }
 
-class Test {
-  final int id;
-  final String name;
-  final String firstName;
-  final String lastName;
-  final String maidenName;
-
-  Test(this.id, this.name, this.firstName, this.lastName, this.maidenName);
+class BuildStudents extends StatelessWidget {
+  BuildStudents({super.key, required this.state, this.onCellTap});
+  final AccountState state;
+  void Function(DataGridCellTapDetails)? onCellTap;
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: FutureBuilder<List<Student>>(
+          future: StudentsDbService().getStudents(accountState: state),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(
+                  child: Text(snapshot.error.toString(),
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
+            }
+            return SfDataGrid(
+              allowPullToRefresh: true,
+              // allowSorting: true,
+              source: EmployeeDataSource(students: snapshot.data!),
+              rowHeight: 80,
+              allowColumnsResizing: true,
+              onCellTap: onCellTap,
+              columns: <GridColumn>[
+                GridColumn(
+                    columnName: 'id',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text(
+                          'الرقم الجامعي',
+                        ))),
+                GridColumn(
+                    columnName: 'name',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerLeft,
+                        child: const Text('الاسم'))),
+                GridColumn(
+                    columnName: 'fatherName',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text('اسم الأب'))),
+                GridColumn(
+                    columnName: 'motherName',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text('اسم الأم'))),
+                GridColumn(
+                    columnName: 'phoneNumber',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text('رقم الهاتف'))),
+                GridColumn(
+                    columnName: 'area',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text(' الهاتف'))),
+                GridColumn(
+                    columnName: 'acceptanceType',
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text('نوع القبول'))),
+                GridColumn(
+                    columnName: 'nationality',
+                    // width: 150,
+                    label: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text('الجنسية'))),
+                // if (state == AccountState.pending)
+                GridColumn(
+                    columnName: '',
+                    width: 200,
+                    label: Container(
+                        // padding: const EdgeInsets.all(16.0),
+                        alignment: Alignment.centerRight,
+                        child: const Text(''))),
+              ],
+            );
+          }),
+    );
+  }
 }
 
+// checkboxColumnSettings: const DataGridCheckboxColumnSettings(showCheckboxOnHeader: true),
+// onCellTap: (details) {
+//   if (details.rowColumnIndex.rowIndex != 0) {
+// int selectedRowIndex = details.rowColumnIndex.rowIndex - 1;
+// var row = EmployeeDataSource(employees: students).effectiveRows.elementAt(selectedRowIndex);
 
-
-// DataTable2(
-//           columnSpacing: 12,
-//           horizontalMargin: 12,
-//           // minWidth: 600,
-//           dataTextStyle: Theme.of(context).textTheme.headlineMedium,
-//           // dataRowColor: ,
-//           columns: const [
-//             DataColumn2(
-//               label: Text('Column A'),
-//               size: ColumnSize.L,
-//             ),
-//             DataColumn(
-//               label: Text('Column B'),
-//             ),
-//             DataColumn(
-//               label: Text('Column C'),
-//             ),
-//             DataColumn(
-//               label: Text('Column D'),
-//             ),
-//             DataColumn(
-//               label: Text('Column D'),
-//             ),
-//             DataColumn(
-//               label: Text('Column D'),
-//             ),
-//             DataColumn(
-//               label: Text('Column D'),
-//             ),
-//             DataColumn(
-//               label: Text('Column D'),
-//             ),
-//             DataColumn(
-//               label: Text('Column NUMBERS'),
-//               numeric: true,
-//             ),
-//           ],
-//           showCheckboxColumn: true,
-//           rows: List<DataRow>.generate(
-//               100,
-//               (index) => DataRow(cells: [
-//                     DataCell(
-//                       Container(
-//                           color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                           child: Text('A' * (20 - index % 10))),
-//                       showEditIcon: true,
-//                     ),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('B' * (10 - (index + 5) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('C' * (15 - (index + 5) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('D' * (15 - (index + 10) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('D' * (50 - (index + 10) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('D' * (15 - (index + 10) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('D' * (15 - (index + 10) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text('D' * (15 - (index + 10) % 10)))),
-//                     DataCell(Container(
-//                         color: index % 2 == 0 ? Colors.amber : const Color(0xff707070),
-//                         child: Text(((index + 0.1) * 25.4).toString())))
-//                   ]))),
+// showDialog(
+//     context: context,
+//     builder: (context) => AlertDialog(
+//         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
+//         content: SizedBox(
+//           height: 300,
+//           width: 300,
+//           child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+//             Row(children: [
+//               const Text('Employee ID'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
+//               const Text(':'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+//               Text(row.getCells()[0].value.toString()),
+//             ]),
+//             Row(children: [
+//               const Text('Employee Name'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+//               const Text(':'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+//               Text(row.getCells()[1].value.toString()),
+//             ]),
+//             Row(children: [
+//               const Text('Designation'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
+//               const Text(':'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+//               Text(row.getCells()[2].value.toString()),
+//             ]),
+//             Row(children: [
+//               const Text('Salary'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 45)),
+//               const Text(':'),
+//               const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+//               Text(row.getCells()[3].value.toString()),
+//             ]),
+//             SizedBox(
+//               width: 300,
+//               child: ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                   },
+//                   child: const Text("OK")),
+//             )
+//           ]),
+//         )));
+//   }
+// },

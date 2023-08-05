@@ -4,10 +4,11 @@ import 'package:student_registeration_system/features/home/models/category.dart'
 import 'package:student_registeration_system/registration/services/student_db_services.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({
+  HomeBody({
     super.key,
+    required this.loadingCollageId,
   });
-
+  bool loadingCollageId;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -17,24 +18,26 @@ class HomeBody extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       itemBuilder: (context, index) {
         if (categories[index].routeName == '/register-for-new-year') {
-          FutureBuilder(
-              future: StudentsDbService().checkRegisterIsActive(context),
-              builder: (context, snapshot) {
-                (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                        child: Text(snapshot.error.toString(),
-                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
-                  }
-                  return CategoreCard(
-                    index: index,
-                  );
-                };
-                return const SizedBox.shrink();
-              });
+          if (!loadingCollageId) {
+            FutureBuilder(
+                future: StudentsDbService().checkRegisterIsActive(context),
+                builder: (context, snapshot) {
+                  (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                          child: Text(snapshot.error.toString(),
+                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
+                    }
+                    return CategoreCard(
+                      index: index,
+                    );
+                  };
+                  return const SizedBox.shrink();
+                });
+          }
         }
         return CategoreCard(
           index: index,

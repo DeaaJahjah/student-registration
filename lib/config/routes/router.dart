@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/admin_home_screen.dart';
 import 'package:student_registeration_system/admin/auth/admin_login.dart';
+import 'package:student_registeration_system/features/notification/notification_screen.dart';
 
 import 'package:student_registeration_system/registration/screens/addtional_info.dart';
 import 'package:student_registeration_system/registration/screens/bro_sis_info_screen.dart';
@@ -58,6 +59,8 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const VerfiyPhoneNumberScree());
     case StudentGuidDetailsScreen.routeName:
       return MaterialPageRoute(builder: (_) => const StudentGuidDetailsScreen(), settings: settings);
+    case NotificationScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const NotificationScreen(), settings: settings);
 
     //!Admin routes
     case AdminLogin.routeName:

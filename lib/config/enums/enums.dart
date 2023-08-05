@@ -1,6 +1,6 @@
 enum AuthState { waiting, notSet }
 
-enum NotificationType { normal, completeFees }
+enum NotificationType { normal, completeFees, ad }
 
 enum RegistrationType { newStudent, registerForNew }
 

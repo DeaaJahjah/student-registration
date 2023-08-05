@@ -50,7 +50,9 @@ dependencies:
   data_table_2: 
   flutter_datetime_picker_plus:
   flutter_rounded_date_picker: ^3.0.4
-
+  syncfusion_flutter_datagrid: ^22.2.5
+  quickalert: ^1.0.1
+  flutter_local_notifications: ^9.4.0
   
 
 dev_dependencies:

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/student_dashboard_screen.dart';
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
+import 'package:student_registeration_system/registration/services/collage_db_services.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   static const routeName = '/admin-home-screen';
@@ -56,7 +58,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   },
                 ),
                 SideButton(
-                  title: 'حدمات',
+                  title: 'خدمات',
                   index: 2,
                   isSelected: selectedPageIndex == 2,
                   onTap: () {
@@ -64,7 +66,45 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       selectedPageIndex = 2;
                     });
                   },
-                )
+                ),
+                StreamBuilder(
+                    stream: CollageDbService().getRegsterationState(context),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                            child: Text(snapshot.error.toString(),
+                                style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
+                      }
+                      if (snapshot.hasData) {
+                        print(snapshot.data!);
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('فتح التسجيل'),
+                            Switch(
+                                value: snapshot.data!.data()!['active_registration_for_new_year'],
+                                onChanged: (value) async {
+                                  QuickAlert.show(
+                                      context: context,
+                                      customAsset: 'assets/images/confirm.gif',
+                                      type: QuickAlertType.confirm,
+                                      text: 'هل انت متأكد من ${value ? 'فتح' : 'اغلاق'} التسجيل على السنة الجديدة؟',
+                                      confirmBtnText: 'نعم',
+                                      cancelBtnText: 'لا',
+                                      confirmBtnColor: primaryColor,
+                                      onConfirmBtnTap: () async {
+                                        Navigator.pop(context);
+                                        await CollageDbService().updateRegistrationState(context, value);
+                                      });
+                                })
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    })
               ],
             ),
           ),

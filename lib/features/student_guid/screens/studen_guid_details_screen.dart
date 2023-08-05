@@ -14,15 +14,17 @@ class StudentGuidDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final guid = ModalRoute.of(context)!.settings.arguments as StudentGuid;
-    const guid = StudentGuid(
-        id: 'dada',
-        title: 'مصدقة تخرج',
-        fees: 50000,
-        link: 'http://www.mohe.gov.sy/mohe/',
-        path: 'توقيع اتحاد الطلبة - الشؤون الطلابية - الامتحانات - رئيس الدائرة - العميد أو النائب',
-        requiredDocs: 'براءة ذمة موقعة من السكن الجامعي - صورة عن الهوية - طلب من الديوان مع الطوابع');
-    final List<String> docs = guid.requiredDocs.split('-').toList();
+    final guid = ModalRoute.of(context)!.settings.arguments as StudentGuid;
+    // const guid = StudentGuid(
+    //     id: 'dada',
+    //     title: 'مصدقة تخرج',
+    //     fees: 50000,
+    //     link: 'http://www.mohe.gov.sy/mohe/',
+    //     path: 'توقيع اتحاد الطلبة - الشؤون الطلابية - الامتحانات - رئيس الدائرة - العميد أو النائب',
+    //     requiredDocs: 'براءة ذمة موقعة من السكن الجامعي - صورة عن الهوية - طلب من الديوان مع الطوابع');
+    final List<String> docs = guid.requiredDocs.split(',').toList();
+    final List<String> path = guid.path.split(',').toList();
+
     return Scaffold(
       body: SafeArea(
           child: ListView(
@@ -73,6 +75,30 @@ class StudentGuidDetailsScreen extends StatelessWidget {
                   },
                 ),
                 const UnderLineText(title: 'المسار'),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: path.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 10,
+                            height: 10,
+                            color: secondaryColor,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                          ),
+                          Text(
+                            path[index],
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
                 const UnderLineText(title: 'الرسوم'),
                 sizedBoxSmall,
                 Text(

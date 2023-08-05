@@ -52,6 +52,7 @@ class AdsBody extends StatelessWidget {
 
         return ListView.builder(
           shrinkWrap: true,
+          padding: const EdgeInsets.all(10),
           physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {

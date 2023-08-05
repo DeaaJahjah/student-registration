@@ -47,6 +47,7 @@ class StudentGuidScreen extends StatelessWidget {
               }
 
               return ListView.builder(
+                padding: const EdgeInsets.all(10),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data!.length,
