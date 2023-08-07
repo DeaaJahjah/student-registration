@@ -10,3 +10,18 @@ String getAccountState(AccountState accountState) {
       return 'تحميد';
   }
 }
+
+String getStudyState(StudyState studyState) {
+  switch (studyState) {
+    case StudyState.newStudent:
+      return 'مستجد';
+    case StudyState.zeroFail:
+      return 'راسب ولا مرة';
+
+    case StudyState.failOnce:
+      return 'راسب مرة';
+
+    case StudyState.failTwice:
+      return 'راسب مرتين';
+  }
+}

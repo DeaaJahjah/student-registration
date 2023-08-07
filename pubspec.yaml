@@ -53,6 +53,9 @@ dependencies:
   syncfusion_flutter_datagrid: ^22.2.5
   quickalert: ^1.0.1
   flutter_local_notifications: ^9.4.0
+  file_picker:
+  lottie:
+ 
   
 
 dev_dependencies:

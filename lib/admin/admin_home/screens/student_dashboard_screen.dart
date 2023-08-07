@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/admin/admin_home/services/data_source.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
+import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/registration/models/student.dart';
 import 'package:student_registeration_system/registration/services/student_db_services.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -24,14 +25,19 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            bottom: const TabBar(tabs: [Text('الطلاب الجدد'), Text('الطلاب القدامى')]),
+            bottom: TabBar(indicatorColor: secondaryColor, padding: const EdgeInsets.all(10), tabs: [
+              Text('الطلاب الجدد', style: Theme.of(context).textTheme.headlineMedium),
+              Text('الطلاب القدامى', style: Theme.of(context).textTheme.headlineMedium)
+            ]),
           ),
-          body: TabBarView(children: [
+          body: const TabBarView(children: [
             BuildStudents(
+              allowCellTap: false,
               state: AccountState.pending,
             ),
             BuildStudents(
               state: AccountState.active,
+              allowCellTap: true,
             ),
           ]),
         ),
@@ -41,9 +47,9 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
 }
 
 class BuildStudents extends StatelessWidget {
-  BuildStudents({super.key, required this.state, this.onCellTap});
+  const BuildStudents({super.key, required this.state, required this.allowCellTap});
   final AccountState state;
-  void Function(DataGridCellTapDetails)? onCellTap;
+  final bool allowCellTap;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -65,7 +71,14 @@ class BuildStudents extends StatelessWidget {
               source: EmployeeDataSource(students: snapshot.data!),
               rowHeight: 80,
               allowColumnsResizing: true,
-              onCellTap: onCellTap,
+              onCellTap: !allowCellTap
+                  ? null
+                  : (details) {
+                      int selectedRowIndex = details.rowColumnIndex.rowIndex - 1;
+                      var row = EmployeeDataSource(students: snapshot.data!).effectiveRows.elementAt(selectedRowIndex);
+
+                      print(row.getCells()[0]);
+                    },
               columns: <GridColumn>[
                 GridColumn(
                     columnName: 'id',

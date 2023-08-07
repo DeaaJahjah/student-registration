@@ -8,11 +8,12 @@ import 'package:student_registeration_system/admin/admin_home/screens/admin_home
 import 'package:student_registeration_system/admin/admin_home/screens/student_dashboard_screen.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/utils/transate_enums.dart';
-import 'package:student_registeration_system/features/home/screens/home_screen.dart';
+import 'package:student_registeration_system/config/widgets/custom_snackbar.dart';
 import 'package:student_registeration_system/features/notification/model/notification_model.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
 import 'package:student_registeration_system/registration/models/collage.dart';
 import 'package:student_registeration_system/registration/models/student.dart';
+import 'package:student_registeration_system/splash_screen.dart';
 import '../providers/registration_provider.dart';
 
 class StudentsDbService {
@@ -44,8 +45,8 @@ class StudentsDbService {
       int studentId = await _getStudentsNumbersPlusOne(student.collageId!);
       student = student.copyWith(studentId: studentId.toString());
       await _db.collection('students').doc(firebaseUser!.uid).set(student.toJson());
-
-      Navigator.of(context).pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
+      showSuccessSnackBar(context, 'تمت عملية التسجيل بنجاح');
+      Navigator.of(context).pushNamedAndRemoveUntil(SplashScreen.routeName, (route) => false);
     } on FirebaseException catch (e) {
       final snackBar = SnackBar(content: Text(e.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

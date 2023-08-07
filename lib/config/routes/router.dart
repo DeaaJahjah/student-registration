@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/admin_home_screen.dart';
+import 'package:student_registeration_system/admin/admin_home/screens/manage_ads_screen.dart';
 import 'package:student_registeration_system/admin/auth/admin_login.dart';
+import 'package:student_registeration_system/admin/super_admin/screens/manage_student_guid_screen.dart';
+import 'package:student_registeration_system/admin/super_admin/screens/super_admin_home_screen.dart';
 import 'package:student_registeration_system/features/notification/notification_screen.dart';
 
 import 'package:student_registeration_system/registration/screens/addtional_info.dart';
@@ -67,6 +70,13 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const AdminLogin());
     case AdminHomeScreen.routeName:
       return MaterialPageRoute(builder: (_) => const AdminHomeScreen());
+
+    case SuperAdminHomeScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const SuperAdminHomeScreen());
+    case ManageAdsScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const ManageAdsScreen());
+    case ManageStudentGuidScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const ManageStudentGuidScreen());
   }
 
   return null;

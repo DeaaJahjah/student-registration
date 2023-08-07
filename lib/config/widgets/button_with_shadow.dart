@@ -12,6 +12,7 @@ class ButtonWithShadow extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 10),
+        alignment: Alignment.center,
         decoration: const BoxDecoration(
             color: primaryColor,
             boxShadow: [BoxShadow(offset: Offset(-2, 2), spreadRadius: 1, blurRadius: 2, color: Colors.black54)]),

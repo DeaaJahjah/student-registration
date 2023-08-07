@@ -85,4 +85,38 @@ class CollageDbService {
 
     return false;
   }
+
+  Future<bool> updateCollage(BuildContext context, Collage collage) async {
+    try {
+      QuickAlert.show(
+        context: context,
+        customAsset: 'assets/images/loading.gif',
+        type: QuickAlertType.loading,
+      );
+      print(collgeId);
+      await _db.collection('colleges').doc(collage.id).update(collage.toJson());
+
+      Navigator.pop(context);
+
+      await QuickAlert.show(
+        context: context,
+        customAsset: 'assets/images/success.gif',
+        type: QuickAlertType.success,
+        text: 'تم العملية بنجاح',
+        autoCloseDuration: const Duration(seconds: 2),
+        onConfirmBtnTap: () {},
+      );
+    } catch (e) {
+      Navigator.pop(context);
+      print(e.toString());
+      QuickAlert.show(
+        context: context,
+        customAsset: 'assets/images/error.gif',
+        type: QuickAlertType.error,
+        text: 'حدث خطأ',
+      );
+    }
+
+    return false;
+  }
 }

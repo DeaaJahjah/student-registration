@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:student_registeration_system/admin/admin_home/screens/manage_ads_screen.dart';
-import 'package:student_registeration_system/admin/admin_home/screens/student_dashboard_screen.dart';
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
+import 'package:student_registeration_system/admin/super_admin/screens/manage_registration_fees_screen.dart';
+import 'package:student_registeration_system/admin/super_admin/screens/manage_student_guid_screen.dart';
+import 'package:student_registeration_system/admin/super_admin/services/super_admin_db_services.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
-import 'package:student_registeration_system/registration/services/collage_db_services.dart';
 
-class AdminHomeScreen extends StatefulWidget {
-  static const routeName = '/admin-home-screen';
+class SuperAdminHomeScreen extends StatefulWidget {
+  static const routeName = '/super-admin-home-screen';
 
-  const AdminHomeScreen({super.key});
+  const SuperAdminHomeScreen({super.key});
 
   @override
-  State<AdminHomeScreen> createState() => _AdminHomeScreenState();
+  State<SuperAdminHomeScreen> createState() => _SuperAdminHomeScreenState();
 }
 
-class _AdminHomeScreenState extends State<AdminHomeScreen> {
+class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
   int selectedPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(children: [
-        if (selectedPageIndex == 0) const StudentDashboardScreen(),
-        if (selectedPageIndex == 1) const ManageAdsScreen(),
+        if (selectedPageIndex == 0) const ManageStudentGuidScreen(),
+        if (selectedPageIndex == 1) const ManageRegistrationFeesScreen(),
         Expanded(
           flex: 2,
           child: Container(
@@ -40,7 +40,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 ),
                 sizedBoxLarge,
                 SideButton(
-                  title: 'الطلاب',
+                  title: 'دليل الطالب',
                   index: 0,
                   isSelected: selectedPageIndex == 0,
                   onTap: () {
@@ -50,7 +50,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   },
                 ),
                 SideButton(
-                  title: 'إعلانات الكلية',
+                  title: 'رسوم وأقساط',
                   index: 1,
                   isSelected: selectedPageIndex == 1,
                   onTap: () {
@@ -59,18 +59,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     });
                   },
                 ),
-                // SideButton(
-                //   title: 'خدمات',
-                //   index: 2,
-                //   isSelected: selectedPageIndex == 2,
-                //   onTap: () {
-                //     setState(() {
-                //       selectedPageIndex = 2;
-                //     });
-                //   },
-                // ),
                 StreamBuilder(
-                    stream: CollageDbService().getRegsterationState(context),
+                    stream: SuperAdminDbService().getRegsterationState(context),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
@@ -85,9 +75,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('فتح التسجيل'),
+                            const Text('فتح التسجيل للطلاب الجدد'),
                             Switch(
-                                value: snapshot.data!.data()!['active_registration_for_new_year'],
+                                value: snapshot.data!.data()!['active_registration_for_new_students'],
                                 onChanged: (value) async {
                                   QuickAlert.show(
                                       context: context,
@@ -99,7 +89,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                       confirmBtnColor: primaryColor,
                                       onConfirmBtnTap: () async {
                                         Navigator.pop(context);
-                                        await CollageDbService().updateRegistrationState(context, value);
+                                        await SuperAdminDbService().updateRegistrationState(context, value);
                                       });
                                 })
                           ],

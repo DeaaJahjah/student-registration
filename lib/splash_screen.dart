@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:student_registeration_system/admin/super_admin/services/super_admin_db_services.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
@@ -111,15 +112,32 @@ class _SplashScreenState extends State<SplashScreen> {
                             }
                           }),
                   const SizedBox(height: 80),
-                  InkWell(
-                    onTap: () async {
-                      Navigator.of(context).pushNamed(PersonalData.routeName);
-                    },
-                    child: Text(
-                      'طالب مستجد',
-                      style: Theme.of(context).textTheme.displayLarge,
-                    ),
-                  )
+                  StreamBuilder(
+                      stream: SuperAdminDbService().getRegsterationState(context),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Center(
+                              child: Text(snapshot.error.toString(),
+                                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
+                        }
+                        if (snapshot.hasData) {
+                          if (snapshot.data!.data()!['active_registration_for_new_students']) {
+                            return InkWell(
+                              onTap: () async {
+                                Navigator.of(context).pushNamed(PersonalData.routeName);
+                              },
+                              child: Text(
+                                'طالب مستجد',
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                            );
+                          }
+                        }
+                        return const SizedBox.shrink();
+                      })
                 ],
               ),
             ),
