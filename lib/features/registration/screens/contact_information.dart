@@ -4,8 +4,8 @@ import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/widgets/button_with_shadow.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
-import 'package:student_registeration_system/registration/screens/father_info.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/screens/father_info.dart';
 
 class ContactInformation extends StatefulWidget {
   static const routeName = '/contact_information';

@@ -5,14 +5,8 @@ import 'package:student_registeration_system/admin/super_admin/widgets/collage_f
 import 'package:student_registeration_system/admin/super_admin/widgets/registreation_fee_card.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
-import 'package:student_registeration_system/config/utils/transate_enums.dart';
-import 'package:student_registeration_system/config/widgets/button_with_shadow.dart';
-import 'package:student_registeration_system/config/widgets/custom_snackbar.dart';
-import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/features/student_guid/models/student_guid.dart';
-import 'package:student_registeration_system/features/student_guid/services/student_guid_db_services.dart';
-import 'package:student_registeration_system/registration/models/collage.dart';
-import 'package:student_registeration_system/registration/services/collage_db_services.dart';
+import 'package:student_registeration_system/features/registration/models/collage.dart';
+import 'package:student_registeration_system/features/registration/services/collage_db_services.dart';
 
 class ManageRegistrationFeesScreen extends StatefulWidget {
   static const routeName = '/manage-fees';

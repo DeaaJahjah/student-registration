@@ -5,23 +5,22 @@ import 'package:student_registeration_system/admin/auth/admin_login.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/manage_student_guid_screen.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/super_admin_home_screen.dart';
 import 'package:student_registeration_system/features/notification/notification_screen.dart';
-
-import 'package:student_registeration_system/registration/screens/addtional_info.dart';
-import 'package:student_registeration_system/registration/screens/bro_sis_info_screen.dart';
-import 'package:student_registeration_system/registration/screens/college_info.dart';
-import 'package:student_registeration_system/registration/screens/complete_data.dart';
-import 'package:student_registeration_system/registration/screens/contact_information.dart';
-import 'package:student_registeration_system/registration/screens/father_info.dart';
-import 'package:student_registeration_system/registration/screens/high_school_sertificat.dart';
-import 'package:student_registeration_system/registration/screens/mother_info.dart';
-import 'package:student_registeration_system/registration/screens/partisan_info.dart';
-import 'package:student_registeration_system/registration/screens/personal_data.dart';
-import 'package:student_registeration_system/registration/screens/schools_info.dart';
+import 'package:student_registeration_system/features/registration/screens/addtional_info.dart';
+import 'package:student_registeration_system/features/registration/screens/bro_sis_info_screen.dart';
+import 'package:student_registeration_system/features/registration/screens/college_info.dart';
+import 'package:student_registeration_system/features/registration/screens/complete_data.dart';
+import 'package:student_registeration_system/features/registration/screens/contact_information.dart';
+import 'package:student_registeration_system/features/registration/screens/father_info.dart';
+import 'package:student_registeration_system/features/registration/screens/high_school_sertificat.dart';
+import 'package:student_registeration_system/features/registration/screens/mother_info.dart';
+import 'package:student_registeration_system/features/registration/screens/partisan_info.dart';
+import 'package:student_registeration_system/features/registration/screens/personal_data.dart';
+import 'package:student_registeration_system/features/registration/screens/schools_info.dart';
+import 'package:student_registeration_system/features/registration/screens/verfiy_phone_number_screen.dart';
 import 'package:student_registeration_system/features/ads/screens/ads_screen.dart';
 import 'package:student_registeration_system/features/home/screens/home_screen.dart';
 import 'package:student_registeration_system/features/student_guid/screens/studen_guid_screen.dart';
 import 'package:student_registeration_system/features/student_guid/screens/studen_guid_details_screen.dart';
-import 'package:student_registeration_system/registration/screens/verfiy_phone_number_screen.dart';
 import 'package:student_registeration_system/splash_screen.dart';
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {

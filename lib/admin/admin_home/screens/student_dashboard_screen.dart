@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:student_registeration_system/admin/admin_home/services/data_source.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
-import 'package:student_registeration_system/registration/models/student.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/models/student.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class StudentDashboardScreen extends StatefulWidget {

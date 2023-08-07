@@ -3,7 +3,7 @@ import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 class DeleteEditButton extends StatelessWidget {
   // final void Function()? onReject;

@@ -4,8 +4,7 @@ import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/widgets/maritalstatus_drop_down.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-
-import '../../registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
 
 class BroSisInfoWidget extends StatefulWidget {
   final int index;

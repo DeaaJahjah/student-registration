@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
-import 'package:student_registeration_system/registration/models/certificate.dart';
-import 'package:student_registeration_system/registration/models/person.dart';
-import 'package:student_registeration_system/registration/models/school.dart';
+import 'package:student_registeration_system/features/registration/models/certificate.dart';
+import 'package:student_registeration_system/features/registration/models/person.dart';
+import 'package:student_registeration_system/features/registration/models/school.dart';
 
 part 'student.g.dart';
 

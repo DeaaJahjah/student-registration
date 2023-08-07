@@ -8,8 +8,8 @@ import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/features/ads/models/ad.dart';
 import 'package:student_registeration_system/features/notification/model/notification_model.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 class AdsDbServices {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

@@ -10,12 +10,12 @@ import 'package:student_registeration_system/config/widgets/custom_progress.dart
 import 'package:student_registeration_system/config/widgets/custom_snackbar.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
-import 'package:student_registeration_system/registration/screens/complete_data.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 import 'package:path/path.dart' as path;
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/screens/complete_data.dart';
 
 class PersonalData extends StatefulWidget {
   static const routeName = '/personal_date';

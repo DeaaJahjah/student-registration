@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/widgets/individuals_num_drop_down.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
 
 class WifeInfo extends StatefulWidget {
   const WifeInfo({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/features/home/models/category.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 class HomeBody extends StatelessWidget {
   HomeBody({

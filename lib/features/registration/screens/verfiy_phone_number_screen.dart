@@ -7,7 +7,7 @@ import 'package:student_registeration_system/config/widgets/custom_progress.dart
 import 'package:student_registeration_system/config/widgets/custom_snackbar.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/shadow_button.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 import '../providers/registration_provider.dart';
 

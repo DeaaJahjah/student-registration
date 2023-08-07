@@ -6,7 +6,7 @@ import 'package:student_registeration_system/config/widgets/button_with_shadow.d
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/skip_button.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/screens/verfiy_phone_number_screen.dart';
+import 'package:student_registeration_system/features/registration/screens/verfiy_phone_number_screen.dart';
 
 import '../providers/registration_provider.dart';
 

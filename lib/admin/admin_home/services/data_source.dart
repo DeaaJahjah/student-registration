@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/admin/admin_home/widgets/delete_edite_button.dart';
 import 'package:student_registeration_system/config/enums/enums.dart';
-import 'package:student_registeration_system/registration/models/student.dart';
+import 'package:student_registeration_system/features/registration/models/student.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class EmployeeDataSource extends DataGridSource {

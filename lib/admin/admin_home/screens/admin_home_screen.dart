@@ -5,7 +5,7 @@ import 'package:student_registeration_system/admin/admin_home/screens/student_da
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
-import 'package:student_registeration_system/registration/services/collage_db_services.dart';
+import 'package:student_registeration_system/features/registration/services/collage_db_services.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   static const routeName = '/admin-home-screen';

@@ -6,10 +6,10 @@ import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/config/widgets/button_with_shadow.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/models/collage.dart';
-import 'package:student_registeration_system/registration/screens/partisan_info.dart';
+import 'package:student_registeration_system/features/registration/models/collage.dart';
+import 'package:student_registeration_system/features/registration/screens/partisan_info.dart';
+import 'package:student_registeration_system/features/registration/services/collage_db_services.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:student_registeration_system/registration/services/collage_db_services.dart';
 
 import '../providers/registration_provider.dart';
 

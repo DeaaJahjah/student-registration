@@ -11,8 +11,8 @@ import 'package:student_registeration_system/config/utils/transate_enums.dart';
 import 'package:student_registeration_system/config/widgets/custom_snackbar.dart';
 import 'package:student_registeration_system/features/notification/model/notification_model.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
-import 'package:student_registeration_system/registration/models/collage.dart';
-import 'package:student_registeration_system/registration/models/student.dart';
+import 'package:student_registeration_system/features/registration/models/collage.dart';
+import 'package:student_registeration_system/features/registration/models/student.dart';
 import 'package:student_registeration_system/splash_screen.dart';
 import '../providers/registration_provider.dart';
 

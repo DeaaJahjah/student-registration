@@ -4,8 +4,7 @@ import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/config/widgets/custom_appbar.dart';
 import 'package:student_registeration_system/features/home/widgets/home_body.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
-
-import '../../../registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';

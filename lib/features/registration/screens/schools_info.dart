@@ -5,9 +5,9 @@ import 'package:student_registeration_system/config/enums/enums.dart';
 import 'package:student_registeration_system/config/widgets/button_with_shadow.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
-import 'package:student_registeration_system/registration/models/school.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
-import 'package:student_registeration_system/registration/screens/high_school_sertificat.dart';
+import 'package:student_registeration_system/features/registration/models/school.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/screens/high_school_sertificat.dart';
 import 'dart:math';
 
 class SchoolsInfo extends StatefulWidget {

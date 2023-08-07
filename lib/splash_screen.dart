@@ -12,8 +12,8 @@ import 'package:student_registeration_system/config/widgets/registration_appBare
 import 'package:student_registeration_system/config/widgets/shadow_button.dart';
 import 'package:student_registeration_system/config/widgets/text_input.dart';
 import 'package:student_registeration_system/features/home/screens/home_screen.dart';
-import 'package:student_registeration_system/registration/screens/personal_data.dart';
-import 'package:student_registeration_system/registration/services/student_db_services.dart';
+import 'package:student_registeration_system/features/registration/screens/personal_data.dart';
+import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/';

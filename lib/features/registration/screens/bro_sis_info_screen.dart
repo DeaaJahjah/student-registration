@@ -6,9 +6,9 @@ import 'package:student_registeration_system/config/widgets/bro_sis_ino_widget.d
 import 'package:student_registeration_system/config/widgets/button_with_shadow.dart';
 import 'package:student_registeration_system/config/widgets/individuals_num_drop_down.dart';
 import 'package:student_registeration_system/config/widgets/registration_appBare.dart';
-import 'package:student_registeration_system/registration/models/person.dart';
-import 'package:student_registeration_system/registration/screens/schools_info.dart';
+import 'package:student_registeration_system/features/registration/screens/schools_info.dart';
 
+import '../models/person.dart';
 import '../providers/registration_provider.dart';
 
 class BroAndSisInfo extends StatefulWidget {

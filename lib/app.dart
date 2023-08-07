@@ -6,7 +6,7 @@ import 'package:student_registeration_system/config/routes/router.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/features/home/screens/home_screen.dart';
 import 'package:student_registeration_system/features/notification/services/navigation_service.dart';
-import 'package:student_registeration_system/registration/providers/registration_provider.dart';
+import 'package:student_registeration_system/features/registration/providers/registration_provider.dart';
 import 'package:student_registeration_system/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
