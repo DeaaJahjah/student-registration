@@ -54,6 +54,7 @@ class StudentsDbService {
   }
 
   Future<Student?> getStudentById(String? id) async {
+    print(firebaseUser!.uid);
     var doc = await _db.collection('students').doc(id ?? firebaseUser!.uid).get();
     if (doc.exists) {
       return Student.fromFirestore(doc);

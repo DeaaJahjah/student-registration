@@ -47,8 +47,10 @@ class RegistrationFeesDbService {
     try {
       final query =
           await _db.collection('registrationFees').where('acceptance_type', isEqualTo: acceptanceType.name).get();
-
+      print('-------------------');
       for (var doc in query.docs) {
+        print(doc.data());
+
         fees.add(Fee.fromFirestore(doc));
       }
 

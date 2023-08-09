@@ -2,7 +2,7 @@ enum AuthState { waiting, notSet }
 
 enum NotificationType { normal, completeFees, ad }
 
-enum RegistrationType { newStudent, registerForNew }
+enum RegistrationType { newStudent, registerForNewYear }
 
 enum StydyLevel { primary, middle, highe }
 

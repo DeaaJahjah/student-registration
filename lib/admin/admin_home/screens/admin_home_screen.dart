@@ -5,6 +5,7 @@ import 'package:student_registeration_system/admin/admin_home/screens/student_da
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
+import 'package:student_registeration_system/config/widgets/skip_button.dart';
 import 'package:student_registeration_system/features/registration/services/collage_db_services.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -59,16 +60,22 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     });
                   },
                 ),
-                // SideButton(
-                //   title: 'خدمات',
-                //   index: 2,
-                //   isSelected: selectedPageIndex == 2,
-                //   onTap: () {
-                //     setState(() {
-                //       selectedPageIndex = 2;
-                //     });
-                //   },
-                // ),
+                SkipButton(
+                    title: 'ارسال اشعار استكمال الرسوم',
+                    onTap: () async {
+                      QuickAlert.show(
+                          context: context,
+                          customAsset: 'assets/images/confirm.gif',
+                          type: QuickAlertType.confirm,
+                          text: ' هل انت متاكد من ارسال اشعار استكمال الرسوم؟',
+                          confirmBtnText: 'نعم',
+                          cancelBtnText: 'لا',
+                          confirmBtnColor: primaryColor,
+                          onConfirmBtnTap: () async {
+                            Navigator.pop(context);
+                            await CollageDbService().senCompleteFeesNotification(context);
+                          });
+                    }),
                 StreamBuilder(
                     stream: CollageDbService().getRegsterationState(context),
                     builder: (context, snapshot) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/features/home/models/category.dart';
+import 'package:student_registeration_system/features/payments/screens/congrats_screen.dart';
 import 'package:student_registeration_system/features/registration/services/student_db_services.dart';
 
 class HomeBody extends StatelessWidget {
@@ -17,24 +18,27 @@ class HomeBody extends StatelessWidget {
       itemCount: categories.length,
       padding: const EdgeInsets.all(10),
       itemBuilder: (context, index) {
-        if (categories[index].routeName == '/register-for-new-year') {
+        if (categories[index].routeName == CongratsScreen.routeName) {
           if (!loadingCollageId) {
             FutureBuilder(
                 future: StudentsDbService().checkRegisterIsActive(context),
                 builder: (context, snapshot) {
-                  (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                          child: Text(snapshot.error.toString(),
-                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
-                    }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                        child: Text(snapshot.error.toString(),
+                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.red)));
+                  }
+                  if (snapshot.data!) {
                     return CategoreCard(
                       index: index,
                     );
-                  };
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+
                   return const SizedBox.shrink();
                 });
           }

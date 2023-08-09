@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 
 class SuperAdminDbService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final adminId = FirebaseAuth.instance.currentUser!.uid;
+  // final adminId = FirebaseAuth.instance.currentUser!.uid;
 
   Future<bool> updateRegistrationState(BuildContext context, bool value) async {
     try {
@@ -15,7 +14,10 @@ class SuperAdminDbService {
         type: QuickAlertType.loading,
       );
 
-      await _db.collection('superAdmin').doc(adminId).update({'active_registration_for_new_students': value});
+      await _db
+          .collection('superAdmin')
+          .doc('7E5Ur14sYCaUZGbhbe9stBsI2ld2')
+          .update({'active_registration_for_new_students': value});
 
       Navigator.pop(context);
 
@@ -43,7 +45,7 @@ class SuperAdminDbService {
 
   Stream<DocumentSnapshot<Map<String, dynamic>>>? getRegsterationState(BuildContext context) {
     try {
-      return _db.collection('superAdmin').doc(adminId).snapshots();
+      return _db.collection('superAdmin').doc('7E5Ur14sYCaUZGbhbe9stBsI2ld2').snapshots();
 
       // return doc.data()!['active_registration_for_new_year'];
       // final collage = Collage.fromFirestore(doc);

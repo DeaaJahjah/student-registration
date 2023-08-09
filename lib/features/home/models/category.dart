@@ -11,6 +11,6 @@ class Category {
 List<Category> categories = [
   Category(title: 'إعلانات الكلية', routeName: '/ads-screen'),
   Category(title: 'دليل الطالب', routeName: '/student-guid'),
-  Category(title: 'مدفوعات', routeName: 'routeName'),
-  Category(title: 'التسجيل على السنة الجديدة', routeName: '/register-for-new-year'),
+  Category(title: 'مدفوعات', routeName: '/payments-screen'),
+  Category(title: 'التسجيل على السنة الجديدة', routeName: '/congrats-screen'),
 ];

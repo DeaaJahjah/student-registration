@@ -33,7 +33,6 @@ class _VerfiyPhoneNumberScreeState extends State<VerfiyPhoneNumberScree> {
     Future.delayed(Duration.zero, () async {
       isLoading = true;
       setState(() {});
-
       try {
         await auth.verifyPhoneNumber(
           phoneNumber: '+966 ${context.read<RegistrationProvider>().student.phoneNumber}',
@@ -51,12 +50,13 @@ class _VerfiyPhoneNumberScreeState extends State<VerfiyPhoneNumberScree> {
             setState(() {
               isLoading = false;
               verificationIDFromFirebase = verificationId;
+              print(verificationId);
             });
           },
         );
-        // setState(() {
-        //   isLoading = false;
-        // });
+        setState(() {
+          isLoading = false;
+        });
       } catch (e) {
         isLoading = false;
 
@@ -158,11 +158,11 @@ class _VerfiyPhoneNumberScreeState extends State<VerfiyPhoneNumberScree> {
           });
         }
       }
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       setState(() {
         isLoadingOTP = false;
       });
-      showErrorSnackBar(context, e.message.toString());
+      showErrorSnackBar(context, 'رمز التحقق غير صحيح');
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:student_registeration_system/features/ads/screens/ads_screen.dar
 
 import 'package:student_registeration_system/features/notification/model/notification_model.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
+import 'package:student_registeration_system/features/payments/screens/complet_fees_screen.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const String routeName = '/notification';
@@ -71,7 +72,9 @@ class NotificationScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(CompletFeesScreen.routeName);
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.only(left: 8, right: 8, top: 5, bottom: 5),
                                           decoration: const BoxDecoration(color: primaryColor, boxShadow: [

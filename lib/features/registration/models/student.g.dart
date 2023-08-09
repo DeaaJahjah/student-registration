@@ -14,6 +14,7 @@ Student _$StudentFromJson(Map<String, dynamic> json) => Student(
       studyState: $enumDecodeNullable(_$StudyStateEnumMap, json['studyState']),
       accountState:
           $enumDecodeNullable(_$AccountStateEnumMap, json['accountState']),
+      studyYear: json['study_year'] as String?,
       collageName: json['collage_name'] as String?,
       email: json['email'] as String?,
       collageId: json['collage_id'] as String?,
@@ -87,6 +88,7 @@ Map<String, dynamic> _$StudentToJson(Student instance) => <String, dynamic>{
       'acceptance_type': _$AcceptanceTypeEnumMap[instance.acceptanceType],
       'studyState': _$StudyStateEnumMap[instance.studyState],
       'accountState': _$AccountStateEnumMap[instance.accountState],
+      'study_year': instance.studyYear,
       'collage_name': instance.collageName,
       'collage_id': instance.collageId,
       'department_name': instance.departmentName,

@@ -3,8 +3,8 @@ import 'package:student_registeration_system/config/theme/theme.dart';
 
 class SkipButton extends StatelessWidget {
   final void Function()? onTap;
-  const SkipButton({Key? key, required this.onTap}) : super(key: key);
-
+  const SkipButton({Key? key, required this.onTap, this.title}) : super(key: key);
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,7 +17,7 @@ class SkipButton extends StatelessWidget {
               color: secondaryColor,
               boxShadow: [BoxShadow(offset: Offset(-2, 2), spreadRadius: 1, blurRadius: 2, color: Colors.black54)]),
           child: Text(
-            'تخطي',
+            title ?? 'تخطي',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ),

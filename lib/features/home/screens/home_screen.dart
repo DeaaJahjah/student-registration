@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool loadingCollageId = true;
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      context.read<RegistrationProvider>().getStudent().then((value) {
+    Future.delayed(Duration.zero, () async {
+      await context.read<RegistrationProvider>().getStudent().then((value) {
         setState(() {
           loadingCollageId = false;
         });

@@ -19,6 +19,8 @@ class Student extends Equatable {
   StudyState? studyState;
   @JsonKey(name: "accountState")
   AccountState? accountState;
+  @JsonKey(name: "study_year")
+  String? studyYear;
   @JsonKey(name: "collage_name")
   String? collageName;
   @JsonKey(name: "collage_id")
@@ -114,6 +116,7 @@ class Student extends Equatable {
     this.acceptanceType,
     this.studyState,
     this.accountState,
+    this.studyYear,
     this.collageName,
     this.email,
     this.collageId,
@@ -171,6 +174,7 @@ class Student extends Equatable {
     AcceptanceType? acceptanceType,
     StudyState? studyState,
     AccountState? accountState,
+    String? studyYear,
     String? collageName,
     String? collageId,
     String? departmentName,
@@ -227,6 +231,7 @@ class Student extends Equatable {
       acceptanceType: acceptanceType ?? this.acceptanceType,
       studyState: studyState ?? this.studyState,
       accountState: accountState ?? this.accountState,
+      studyYear: studyYear ?? this.studyYear,
       email: email ?? this.email,
       collageName: collageName ?? this.collageName,
       collageId: collageId ?? this.collageId,

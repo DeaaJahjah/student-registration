@@ -63,6 +63,7 @@ class _AddtionalInfoState extends State<AddtionalInfo> {
                         clubsOrgs: clubsController.text,
                         accountState: AccountState.pending,
                         studyState: StudyState.newStudent,
+                        studyYear: 'الأولى',
                         acceptanceType: AcceptanceType.general,
                       );
                   Navigator.of(context).pushNamed(VerfiyPhoneNumberScree.routeName);

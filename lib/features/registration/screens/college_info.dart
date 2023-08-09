@@ -31,6 +31,7 @@ class _CollegeInfoState extends State<CollegeInfo> {
   String? acceptanceType;
   @override
   Widget build(BuildContext context) {
+    CollageDbService().getCollages();
     return Scaffold(
       body: SafeArea(
         child: Form(

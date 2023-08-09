@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/features/notification/notification_screen.dart';
 import 'package:student_registeration_system/features/notification/services/notification_db_service.dart';
+import 'package:student_registeration_system/features/registration/services/collage_db_services.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key, this.onTap, required this.iconName, required this.title});
@@ -47,7 +48,11 @@ class CustomAppBar extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          Image.asset('assets/images/appbar_logo.png', height: 50, width: 50),
+          InkWell(
+              onTap: () {
+                CollageDbService().updateRegistrationState(context, true);
+              },
+              child: Image.asset('assets/images/appbar_logo.png', height: 50, width: 50)),
         ],
       ),
     );

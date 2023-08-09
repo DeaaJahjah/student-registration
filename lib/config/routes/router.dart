@@ -5,6 +5,10 @@ import 'package:student_registeration_system/admin/auth/admin_login.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/manage_student_guid_screen.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/super_admin_home_screen.dart';
 import 'package:student_registeration_system/features/notification/notification_screen.dart';
+import 'package:student_registeration_system/features/payments/screens/complet_fees_screen.dart';
+import 'package:student_registeration_system/features/payments/screens/congrats_screen.dart';
+import 'package:student_registeration_system/features/payments/screens/make_payment_screen.dart';
+import 'package:student_registeration_system/features/payments/screens/payments_screen.dart';
 import 'package:student_registeration_system/features/registration/screens/addtional_info.dart';
 import 'package:student_registeration_system/features/registration/screens/bro_sis_info_screen.dart';
 import 'package:student_registeration_system/features/registration/screens/college_info.dart';
@@ -63,6 +67,17 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const StudentGuidDetailsScreen(), settings: settings);
     case NotificationScreen.routeName:
       return MaterialPageRoute(builder: (_) => const NotificationScreen(), settings: settings);
+
+    case PaymentsScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const PaymentsScreen(), settings: settings);
+
+    case MakePaymentScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const MakePaymentScreen(), settings: settings);
+    case CongratsScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const CongratsScreen(), settings: settings);
+
+    case CompletFeesScreen.routeName:
+      return MaterialPageRoute(builder: (_) => const CompletFeesScreen(), settings: settings);
 
     //!Admin routes
     case AdminLogin.routeName:
