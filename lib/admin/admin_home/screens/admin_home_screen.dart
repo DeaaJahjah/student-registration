@@ -21,6 +21,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   int selectedPageIndex = 0;
   @override
   Widget build(BuildContext context) {
+    // RegistrationFeesDbService().createFee();
     return Scaffold(
       body: Row(children: [
         if (selectedPageIndex == 0) const StudentDashboardScreen(),

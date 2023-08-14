@@ -63,12 +63,37 @@ class RegistrationFeesDbService {
   }
 
   createFee() async {
+    // await _db.collection('registrationFees').add(
+    //     const Fee(id: '', acceptanceType: AcceptanceType.general, studyState: StudyState.newStudent, cost: 10000)
+    //         .toJson());
+
     await _db.collection('registrationFees').add(
-        const Fee(id: '', acceptanceType: AcceptanceType.general, studyState: StudyState.newStudent, cost: 25000)
+        const Fee(id: '', acceptanceType: AcceptanceType.general, studyState: StudyState.failOnce, cost: 15000)
             .toJson());
 
     await _db.collection('registrationFees').add(
-        const Fee(id: '', acceptanceType: AcceptanceType.parallel, studyState: StudyState.newStudent, cost: 10000)
+        const Fee(id: '', acceptanceType: AcceptanceType.general, studyState: StudyState.failTwice, cost: 25000)
+            .toJson());
+
+    await _db.collection('registrationFees').add(
+        const Fee(id: '', acceptanceType: AcceptanceType.general, studyState: StudyState.zeroFail, cost: 12000)
+            .toJson());
+
+    //parallel
+    // await _db.collection('registrationFees').add(
+    //     const Fee(id: '', acceptanceType: AcceptanceType.parallel, studyState: StudyState.newStudent, cost: 10000)
+    //         .toJson());
+
+    await _db.collection('registrationFees').add(
+        const Fee(id: '', acceptanceType: AcceptanceType.parallel, studyState: StudyState.failOnce, cost: 12000)
+            .toJson());
+
+    await _db.collection('registrationFees').add(
+        const Fee(id: '', acceptanceType: AcceptanceType.parallel, studyState: StudyState.failTwice, cost: 24000)
+            .toJson());
+
+    await _db.collection('registrationFees').add(
+        const Fee(id: '', acceptanceType: AcceptanceType.parallel, studyState: StudyState.zeroFail, cost: 7000)
             .toJson());
   }
 }
