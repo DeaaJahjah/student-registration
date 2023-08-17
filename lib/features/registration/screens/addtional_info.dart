@@ -64,13 +64,22 @@ class _AddtionalInfoState extends State<AddtionalInfo> {
                         accountState: AccountState.pending,
                         studyState: StudyState.newStudent,
                         studyYear: 'الأولى',
-                        acceptanceType: AcceptanceType.general,
+                        // acceptanceType: AcceptanceType.general,
                       );
                   Navigator.of(context).pushNamed(VerfiyPhoneNumberScree.routeName);
                 },
               )),
               sizedBoxSmall,
               SkipButton(onTap: () {
+                context.read<RegistrationProvider>().student = context.read<RegistrationProvider>().student.copyWith(
+                      sportGames: nameController.text,
+                      countriesYouTravled: dateController.text,
+                      clubsOrgs: clubsController.text,
+                      accountState: AccountState.pending,
+                      studyState: StudyState.newStudent,
+                      studyYear: 'الأولى',
+                      // acceptanceType: AcceptanceType.general,
+                    );
                 Navigator.of(context).pushNamed(VerfiyPhoneNumberScree.routeName);
               }),
               sizedBoxSmall,

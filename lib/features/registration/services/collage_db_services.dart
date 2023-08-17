@@ -39,79 +39,79 @@ class CollageDbService {
   }
 
   Future<bool> updateRegistrationState(BuildContext context, bool value) async {
-    try {
-      QuickAlert.show(
-        context: context,
-        customAsset: 'assets/images/loading.gif',
-        type: QuickAlertType.loading,
-      );
-      print(collgeId);
-      await _db.collection('colleges').doc(collgeId).update({'active_registration_for_new_year': value});
+    QuickAlert.show(
+      context: context,
+      customAsset: 'assets/images/loading.gif',
+      type: QuickAlertType.loading,
+    );
+    print(collgeId);
+    await _db.collection('colleges').doc(collgeId).update({'active_registration_for_new_year': value});
 
-      final students = await StudentsDbService().getStudents(accountState: AccountState.active);
-      final parallelFess = await RegistrationFeesDbService().getRegistrationFees(context, AcceptanceType.parallel);
-      final generalFess = await RegistrationFeesDbService().getRegistrationFees(context, AcceptanceType.general);
+    final students = await StudentsDbService().getStudents(accountState: AccountState.active);
+    final parallelFess = await RegistrationFeesDbService().getRegistrationFees(context, AcceptanceType.parallel);
+    final generalFess = await RegistrationFeesDbService().getRegistrationFees(context, AcceptanceType.general);
 
-      print('students ${students.length}');
-      for (var student in students) {
-        if (value) {
-          final order = RegistrationOrder(
-            id: '',
-            year: student.studyYear!,
-            acceptencType: student.acceptanceType == AcceptanceType.general ? 'عام' : 'موازي',
-            studyState: getStudyState(student.studyState!),
-            registrationType: RegistrationType.registerForNewYear,
-            numberOfPayments: 1,
-            isCompleted: false,
-            createdAt: DateTime.now(),
-            annulFees: student.annualFees,
-            registrationFees: student.acceptanceType == AcceptanceType.general
-                ? generalFess
-                    .firstWhere((element) =>
-                        element.acceptanceType == AcceptanceType.general && element.studyState == student.studyState)
-                    .cost
-                : parallelFess
-                    .firstWhere((element) =>
-                        element.acceptanceType == AcceptanceType.parallel && element.studyState == student.studyState)
-                    .cost,
-            payments: const [Payment(dateTime: null, amount: null, paymentNumber: 'الأولى')],
-          );
-          print(order);
-          final ss =
-              await _db.collection('students').doc(student.id).collection('registrationOrders').add(order.toJson());
-          print(ss);
-        }
-        await NotificationDbService().sendNotification(
-            studentId: student.id!,
-            notification: NotificationModle(
-              title: 'تم بدأ التسجيل',
-              body: value ? 'يرجى تسديد الرسوم السنة ${student.studyYear} قبل انتهاء مدة التسجيل' : 'تم اغلاق التسجيل ',
-              isReaded: false,
-              pauload: 'notifications',
-              type: NotificationType.normal,
-              createdAt: DateTime.now(),
-            ));
+    print('students ${students.length}');
+    for (var student in students) {
+      if (value) {
+        final order = RegistrationOrder(
+          id: '',
+          year: student.studyYear!,
+          acceptencType: student.acceptanceType == AcceptanceType.general ? 'عام' : 'موازي',
+          studyState: getStudyState(student.studyState!),
+          registrationType: RegistrationType.registerForNewYear,
+          numberOfPayments: 1,
+          isCompleted: false,
+          createdAt: DateTime.now(),
+          annulFees: student.annualFees,
+          registrationFees: student.acceptanceType == AcceptanceType.general
+              ? generalFess
+                  .firstWhere((element) =>
+                      element.acceptanceType == AcceptanceType.general && element.studyState == student.studyState)
+                  .cost
+              : parallelFess
+                  .firstWhere((element) =>
+                      element.acceptanceType == AcceptanceType.parallel && element.studyState == student.studyState)
+                  .cost,
+          payments: const [Payment(dateTime: null, amount: null, paymentNumber: 'الأولى')],
+        );
+        print(order);
+        final ss =
+            await _db.collection('students').doc(student.id).collection('registrationOrders').add(order.toJson());
+        print(ss);
       }
-      Navigator.pop(context);
-
-      await QuickAlert.show(
-        context: context,
-        customAsset: 'assets/images/success.gif',
-        type: QuickAlertType.success,
-        text: 'تم العملية بنجاح',
-        autoCloseDuration: const Duration(seconds: 2),
-        onConfirmBtnTap: () {},
-      );
-    } catch (e) {
-      Navigator.pop(context);
-      print(e.toString());
-      QuickAlert.show(
-        context: context,
-        customAsset: 'assets/images/error.gif',
-        type: QuickAlertType.error,
-        text: 'حدث خطأ',
-      );
+      await NotificationDbService().sendNotification(
+          studentId: student.id!,
+          notification: NotificationModle(
+            title: 'تم ${value ? 'بدأ' : 'اغلاق'} التسجيل',
+            body: value ? 'يرجى تسديد الرسوم السنة ${student.studyYear} قبل انتهاء مدة التسجيل' : 'تم اغلاق التسجيل ',
+            isReaded: false,
+            pauload: 'notifications',
+            type: NotificationType.normal,
+            createdAt: DateTime.now(),
+          ));
     }
+    Navigator.pop(context);
+
+    await Future.delayed(const Duration(seconds: 1));
+    await QuickAlert.show(
+      context: context,
+      customAsset: 'assets/images/success.gif',
+      type: QuickAlertType.success,
+      text: 'تم العملية بنجاح',
+      autoCloseDuration: const Duration(seconds: 2),
+      onConfirmBtnTap: () {},
+    );
+    // } catch (e) {
+    //   Navigator.pop(context);
+    //   print(e.toString());
+    //   QuickAlert.show(
+    //     context: context,
+    //     customAsset: 'assets/images/error.gif',
+    //     type: QuickAlertType.error,
+    //     text: 'حدث خطأ',
+    //   );
+    // }
 
     return false;
   }
@@ -138,6 +138,7 @@ class CollageDbService {
             order.payments.add(Payment(amount: (order.annulFees! / 2), paymentNumber: 'الثانية'));
 
             await PaymentDbService().updatePayment(context, order, student.id!);
+            print(order.id);
             await NotificationDbService().sendNotification(
                 studentId: student.id!,
                 notification: NotificationModle(
@@ -145,6 +146,7 @@ class CollageDbService {
                   body: 'يرجى استكمال الرسوم السنة ${student.studyYear} قبل انتهاء مدة التسجيل',
                   isReaded: false,
                   pauload: 'notifications',
+                  orderId: order.id,
                   type: NotificationType.completeFees,
                   createdAt: DateTime.now(),
                 ));

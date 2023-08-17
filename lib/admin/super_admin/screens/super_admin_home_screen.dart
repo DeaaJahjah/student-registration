@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
+import 'package:student_registeration_system/admin/auth/admin_login.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/manage_registration_fees_screen.dart';
 import 'package:student_registeration_system/admin/super_admin/screens/manage_student_guid_screen.dart';
 import 'package:student_registeration_system/admin/super_admin/services/super_admin_db_services.dart';
@@ -96,7 +98,36 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
                         );
                       }
                       return const SizedBox.shrink();
-                    })
+                    }),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () async {
+                      var auth = FirebaseAuth.instance;
+
+                      auth.signOut();
+
+                      Navigator.of(context).pushReplacementNamed(AdminLogin.routeName);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      decoration: const BoxDecoration(color: white, boxShadow: [
+                        BoxShadow(offset: Offset(-2, 2), spreadRadius: 1, blurRadius: 2, color: Colors.black54)
+                      ]),
+                      height: 80,
+                      child: Stack(children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'تسجيل خروج',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        )
+                      ]),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/manage_ads_screen.dart';
 import 'package:student_registeration_system/admin/admin_home/screens/student_dashboard_screen.dart';
 import 'package:student_registeration_system/admin/admin_home/widgets/side_button.dart';
+import 'package:student_registeration_system/admin/auth/admin_login.dart';
 import 'package:student_registeration_system/config/constants/constant.dart';
 import 'package:student_registeration_system/config/theme/theme.dart';
 import 'package:student_registeration_system/config/widgets/skip_button.dart';
@@ -114,7 +116,36 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         );
                       }
                       return const SizedBox.shrink();
-                    })
+                    }),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () async {
+                      var auth = FirebaseAuth.instance;
+
+                      auth.signOut();
+
+                      Navigator.of(context).pushReplacementNamed(AdminLogin.routeName);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      decoration: const BoxDecoration(color: white, boxShadow: [
+                        BoxShadow(offset: Offset(-2, 2), spreadRadius: 1, blurRadius: 2, color: Colors.black54)
+                      ]),
+                      height: 80,
+                      child: Stack(children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'تسجيل خروج',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        )
+                      ]),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -55,6 +55,26 @@ class PaymentDbService {
     return orders;
   }
 
+  Future<List<RegistrationOrder>> getLastPaymentByDate({required String id}) async {
+    List<RegistrationOrder> orders = [];
+    var query = await _db
+        .collection('students')
+        .doc(studentId)
+        .collection('registrationOrders')
+        .where('id', isEqualTo: id)
+        .where('isCompleted', isEqualTo: false)
+        .limit(1)
+        .get();
+
+    for (var doc in query.docs) {
+      final order = RegistrationOrder.fromFirestore(doc);
+      // if (order.createdAt.month == date.month) {
+      orders.add(RegistrationOrder.fromFirestore(doc));
+      // }
+    }
+    return orders;
+  }
+
   Future<RegistrationOrder?> getLastPaymentByStudentId({required String studentId}) async {
     RegistrationOrder? order;
     var query = await _db
@@ -68,6 +88,7 @@ class PaymentDbService {
 
     for (var doc in query.docs) {
       order = RegistrationOrder.fromFirestore(doc);
+      print('${order.id}    id');
     }
     return order;
   }

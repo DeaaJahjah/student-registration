@@ -41,12 +41,14 @@ class _CompletFeesScreenState extends State<CompletFeesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orderId = ModalRoute.of(context)!.settings.arguments as String;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child: Scaffold(
             body: FutureBuilder<List<RegistrationOrder>>(
-                future: PaymentDbService().getLastPayment(),
+                future: PaymentDbService().getLastPaymentByDate(id: orderId),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());

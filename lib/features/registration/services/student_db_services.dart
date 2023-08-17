@@ -21,19 +21,23 @@ class StudentsDbService {
 
   Future<List<Student>> getStudents({required AccountState accountState}) async {
     List<Student> students = [];
-    var query = await _db.collection('students').where('collage_id', isEqualTo: firebaseUser!.uid).get();
-
+    var query = await _db
+        .collection('students')
+        .where('collage_id', isEqualTo: firebaseUser!.uid)
+        .where('accountState', isEqualTo: accountState.name)
+        .get();
+    print(firebaseUser!.uid);
     for (var doc in query.docs) {
       final student = Student.fromFirestore(doc);
       print(accountState);
+      students.add(student);
 
-      if (accountState == AccountState.pending) {
-        if (student.accountState == AccountState.pending) {
-          students.add(student);
-        }
-      } else if (student.accountState != AccountState.pending) {
-        students.add(student);
-      }
+      // if (accountState == AccountState.pending) {
+      //   if (student.accountState == AccountState.pending) {
+      //   }
+      // } else if (student.accountState != AccountState.pending) {
+      //   students.add(student);
+      // }
     }
     print(students.length);
     return students;

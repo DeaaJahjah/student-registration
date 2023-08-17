@@ -17,6 +17,7 @@ class NotificationModle {
   final NotificationType type;
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
+  final String? orderId;
 
   NotificationModle(
       {this.notificationId,
@@ -25,6 +26,7 @@ class NotificationModle {
       required this.isReaded,
       required this.pauload,
       required this.type,
+      this.orderId,
       required this.createdAt});
 
   factory NotificationModle.fromJson(Map<String, dynamic> json) => _$NotificationModleFromJson(json);

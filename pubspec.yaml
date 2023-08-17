@@ -25,8 +25,8 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.0
   firebase_storage: ^11.0.7
-  flutter_auth_ui: ^3.1.0
   cloud_firestore: ^4.2.0
+  flutter_auth_ui_web:
   
 
   #state managment

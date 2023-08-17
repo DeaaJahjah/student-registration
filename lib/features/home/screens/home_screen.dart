@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               : const CustomProgress(),
           InkWell(
             onTap: () async {
-              auth.signOut();
+              await auth.signOut();
 
               Navigator.of(context).pushReplacementNamed(SplashScreen.routeName);
             },

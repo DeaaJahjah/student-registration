@@ -414,16 +414,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_auth_ui:
-    dependency: "direct main"
-    description:
-      name: flutter_auth_ui
-      sha256: efc85a4cd430e294d733d0739ee5b0d0786a97286e1ff8223819a1cb69bf7118
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   flutter_auth_ui_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_auth_ui_web
       sha256: "2db0578f9548d5f7a6d204694efa7714b1d15fd8fe71ba2721e25b9b46027f19"

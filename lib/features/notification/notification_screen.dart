@@ -18,6 +18,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Future.delayed(Duration.zero, () => updateNotification());
     return Scaffold(
       body: ListView(
         children: [
@@ -73,7 +74,8 @@ class NotificationScreen extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.of(context).pushNamed(CompletFeesScreen.routeName);
+                                          Navigator.of(context)
+                                              .pushNamed(CompletFeesScreen.routeName, arguments: notification.orderId);
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.only(left: 8, right: 8, top: 5, bottom: 5),
